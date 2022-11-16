@@ -1,5 +1,6 @@
 import 'package:e_commerce/shared/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce/model/item.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -7,6 +8,47 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(top: 22),
+          child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 33),
+              itemCount: items.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: GridTile(
+                    footer: GridTileBar(
+// backgroundColor: Color.fromARGB(66, 73, 127, 110),
+                      trailing: IconButton(
+                          color: Color.fromARGB(255, 62, 94, 70),
+                          onPressed: () {},
+                          icon: const Icon(Icons.add)),
+
+                      leading: const Text("\$12.99"),
+
+                      title: const Text(
+                        "",
+                      ),
+                    ),
+                    child: Stack(children: [
+                      Positioned(
+                        top: -3,
+                        bottom: -9,
+                        right: 0,
+                        left: 0,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(55),
+                            child: Image.asset(items[index].imgPath)),
+                      ),
+                    ]),
+                  ),
+                );
+              }),
+        ),
         drawer: Drawer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
