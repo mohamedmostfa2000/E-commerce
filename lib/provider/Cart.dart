@@ -1,5 +1,13 @@
+import 'package:e_commerce/model/item.dart';
 import 'package:flutter/material.dart';
 
 class Cart with ChangeNotifier {
-  String myName = "Mohamed Mostfa";
+  List selectedProducts = [];
+  int price = 0;
+
+  add(Item product) {
+    selectedProducts.add(product);
+    price += product.price.round();
+    notifyListeners();
+  }
 }

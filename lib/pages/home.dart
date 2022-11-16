@@ -43,14 +43,16 @@ class Home extends StatelessWidget {
                       ),
                     ]),
                     footer: GridTileBar(
-// backgroundColor: Color.fromARGB(66, 73, 127, 110),
-                      trailing: IconButton(
-                          color: Color.fromARGB(255, 62, 94, 70),
-                          onPressed: () {},
-                          icon: Icon(Icons.add)),
-
+                      trailing:
+                          Consumer<Cart>(builder: ((context, Carttt, child) {
+                        return IconButton(
+                            color: Color.fromARGB(255, 62, 94, 70),
+                            onPressed: () {
+                              Carttt.add(items[index]);
+                            },
+                            icon: Icon(Icons.add));
+                      })),
                       leading: Text("\$12.99"),
-
                       title: Text(
                         "",
                       ),
@@ -109,44 +111,44 @@ class Home extends StatelessWidget {
         ),
         appBar: AppBar(
           actions: [
-            Row(
-              children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      bottom: 24,
-                      child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(211, 164, 255, 193),
-                              shape: BoxShape.circle),
-                          child: const Text(
-                            "8",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                          )),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add_shopping_cart),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 12),
-                  child: Text(
-                    "\$ 13",
-                    style: TextStyle(fontSize: 18),
+            Consumer<Cart>(builder: ((context, classInstancee, child) {
+              return Row(
+                children: [
+                  Stack(
+                    children: [
+                      Positioned(
+                        bottom: 24,
+                        child: Container(
+                            child: Text(
+                              "${classInstancee.selectedProducts.length}",
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                            ),
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(211, 164, 255, 193),
+                                shape: BoxShape.circle)),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.add_shopping_cart),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Text(
+                      "\$ ${classInstancee.price}",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              );
+            })),
           ],
           backgroundColor: appbarGreen,
-          title: Consumer<Cart>(builder: ((context, classInstancee, child) {
-            return Text("${classInstancee.myName}");
-          })),
+          title: Text("Home"),
         ));
   }
 }
