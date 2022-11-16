@@ -1,7 +1,10 @@
+import 'package:e_commerce/model/item.dart';
 import 'package:e_commerce/shared/colors.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
+  Item product;
+  Details({required this.product});
   @override
   State<Details> createState() => _DetailsState();
 }

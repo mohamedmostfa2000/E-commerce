@@ -1,3 +1,4 @@
+import 'package:e_commerce/pages/detail.dart';
 import 'package:e_commerce/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/model/item.dart';
@@ -19,21 +20,15 @@ class Home extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {},
-                  child: GridTile(
-                    footer: GridTileBar(
-// backgroundColor: Color.fromARGB(66, 73, 127, 110),
-                      trailing: IconButton(
-                          color: Color.fromARGB(255, 62, 94, 70),
-                          onPressed: () {},
-                          icon: const Icon(Icons.add)),
-
-                      leading: const Text("\$12.99"),
-
-                      title: const Text(
-                        "",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Details(product: items[index]),
                       ),
-                    ),
+                    );
+                  },
+                  child: GridTile(
                     child: Stack(children: [
                       Positioned(
                         top: -3,
@@ -45,6 +40,19 @@ class Home extends StatelessWidget {
                             child: Image.asset(items[index].imgPath)),
                       ),
                     ]),
+                    footer: GridTileBar(
+// backgroundColor: Color.fromARGB(66, 73, 127, 110),
+                      trailing: IconButton(
+                          color: Color.fromARGB(255, 62, 94, 70),
+                          onPressed: () {},
+                          icon: Icon(Icons.add)),
+
+                      leading: Text("\$12.99"),
+
+                      title: Text(
+                        "",
+                      ),
+                    ),
                   ),
                 );
               }),
